@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mein Terminplaner</title>
+    <style>
+        /* CSS für den "Buch"-Design-Look */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0e6df; /* Cremefarbenes Papier */
+            text-align: center;
+        }
+
+        h1 {
+            color: #734e2f; /* Buchtitel-Farbe */
+            font-size: 24px;
+            text-transform: uppercase;
+            padding: 10px 0;
+            background-color: #f5ebdf; /* Buchumschlag-Farbe */
+        }
+
+        #taskList {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #e0d4c2; /* Seiten-Farbe */
+            border: 1px solid #c8b69b; /* Seitenrand */
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Schatten für den 3D-Effekt */
+        }
+
+        li span {
+            flex: 1;
+            font-size: 16px;
+        }
+
+        button {
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-left: 5px;
+        }
+
+        .feedbackInput {
+            margin-right: 5px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button.giveFeedback {
+            background: #3498db;
+        }
+
+        .taskFeedback {
+            background-color: #ecf0f1;
+            padding: 5px;
+            margin-top: 5px;
+            border-radius: 3px;
+        }
+
+        #taskInput {
+            margin-top: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mein Terminplaner</h1>
+    <ul id="taskList">
+        <!-- Hier werden die Aufgaben angezeigt -->
+    </ul>
+    <input type="text" id="taskInput" placeholder="Neue Aufgabe hinzufügen">
+    <button id="addTaskButton">Hinzufügen</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const taskList = document.getElementById("taskList");
+            const taskInput = document.getElementById("taskInput");
+            const addTaskButton = document.getElementById("addTaskButton");
+
+            function addTaskFeedback(taskItem) {
+                const feedbackInput = taskItem.querySelector(".feedbackInput");
+                const feedbackText = feedbackInput.value.trim();
+
+                if (feedbackText !== "") {
+                    // Feedback anzeigen
+                    const feedbackDiv = document.createElement("div");
+                    feedbackDiv.classList.add("taskFeedback");
+                    feedbackDiv.innerText = feedbackText;
+                    taskItem.appendChild(feedbackDiv);
+
+                    // Feedback-Textfeld leeren
+                    feedbackInput.value = "";
+                }
+            }
+
+            taskList.addEventListener("click", function (e) {
+                if (e.target.classList.contains("delete")) {
+                    // Task entfernen
+                    e.target.parentElement.remove();
+                } else if (e.target.classList.contains("complete")) {
+                    // Task als erledigt markieren
+                    e.target.previousElementSibling.style.textDecoration = "line-through";
+                } else if (e.target.classList.contains("giveFeedback")) {
+                    // Feedback hinzufügen
+                    addTaskFeedback(e.target.parentElement);
+                }
+            });
+
+            addTaskButton.addEventListener("click", function () {
+                const taskText = taskInput.value.trim();
+                if (taskText !== "") {
+                    // Task zur Liste hinzufügen
+                    const taskItem = document.createElement("li");
+                    taskItem.innerHTML = `
+                        <span>${taskText}</span>
+                        <button class="delete">Löschen</button>
+                        <button class="complete">Erledigt</button>
+                        <input type="text" class="feedbackInput" placeholder="Feedback eingeben">
+                        <button class="giveFeedback">Feedback geben</button>
+                    `;
+                    taskList.appendChild(taskItem);
+
+                    // Eingabefeld leeren
+                    taskInput.value = "";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
