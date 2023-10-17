@@ -1,6 +1,7 @@
 # mySite
 
 Dokumentation: Mein Terminplaner
+
 <img width="318" alt="Bildschirmfoto 2023-10-17 um 02 08 33" src="https://github.com/AppNewbie86/mySite/assets/101304191/7ac5d0ab-d86b-45b9-b6b5-ae0b99fb92cf">
 <img width="1189" alt="Bildschirmfoto 2023-10-17 um 02 09 18" src="https://github.com/AppNewbie86/mySite/assets/101304191/18f28fd0-7f3a-4857-918b-ebb2c5d44386">
 <img width="1156" alt="Bildschirmfoto 2023-10-17 um 02 10 17" src="https://github.com/AppNewbie86/mySite/assets/101304191/1db982a7-47f1-4340-bb2c-85dc68909ace">
